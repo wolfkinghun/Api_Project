@@ -11,27 +11,33 @@ const options = {
 
 let totalPages 
 let totalItems
-let itemPerPage = 3
+const itemPerPage = 3
 let page = 1
 let data
+let images = []
 
 function renderFc(result) {
 	console.log(result);
 	data = result
+	for (let i = 0; i < result.length; i++) {
+		images.push(`https://source.unsplash.com/random/368×207/?food&randomNumber=${Math.floor(Math.random() * 100) + 1}`)
+	}
 	totalItems = data.length
 	totalPages = Math.ceil(totalItems / itemPerPage)
 	renderPage()
 	renderPageButtons()
+	document.querySelector('.pages').children[0].style.color = '#48CAE4'
 	toggleHidden()
 }
 
 function renderPage() {
 	document.querySelector('.articles').innerHTML = ""
 	for (let pageData = (page - 1) * itemPerPage; pageData < (page) * itemPerPage; pageData++) {
+		if (data.length == pageData) break
 		document.querySelector('.articles').innerHTML +=`<article>
 														<div class="article-wrapper">
 														<figure>
-															<img src="https://picsum.photos/id/1011/800/450" alt="" />
+															<img src="${images[pageData]}" alt="" />
 														</figure>
 														<div class="article-body">
 															<h2>${data[pageData].title}</h2>
@@ -60,6 +66,10 @@ function renderPageButtons() {
 
 function handlePage(event) {
 	page = +event.target.textContent
+	for (let element of document.querySelector('.pages').children) {
+		if (page == element.textContent) element.style.color = '#48CAE4'
+		else element.style.color = 'black'
+	}
 	renderPage()
 }
 
