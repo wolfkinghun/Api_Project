@@ -21,6 +21,7 @@ function renderFc(result) {
 	totalItems = data.length
 	totalPages = Math.ceil(totalItems / itemPerPage)
 	renderPage()
+	renderPageButtons()
 	toggleHidden()
 }
 
@@ -47,8 +48,19 @@ function renderPage() {
 	}
 }
 
-function handlePage() {
+function renderPageButtons() {
+	document.querySelector('.pages').innerHTML = ""
+	for (let i = 1; i <= totalPages; i++) {
+		let button = document.createElement('button')
+		button.textContent = i
+		button.addEventListener('click', handlePage)
+		document.querySelector('.pages').appendChild(button)
+	}
+}
 
+function handlePage(event) {
+	page = +event.target.textContent
+	renderPage()
 }
 
 document.querySelector('.myBtn').addEventListener('click', () => {
