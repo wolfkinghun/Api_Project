@@ -11,7 +11,7 @@ const options = {
 
 let totalPages 
 let totalItems
-let itemPerPage = 3
+const itemPerPage = 3
 let page = 1
 let data
 
@@ -22,6 +22,7 @@ function renderFc(result) {
 	totalPages = Math.ceil(totalItems / itemPerPage)
 	renderPage()
 	renderPageButtons()
+	document.querySelector('.pages').children[0].style.color = '#48CAE4'
 	toggleHidden()
 }
 
@@ -61,6 +62,10 @@ function renderPageButtons() {
 
 function handlePage(event) {
 	page = +event.target.textContent
+	for (let element of document.querySelector('.pages').children) {
+		if (page == element.textContent) element.style.color = '#48CAE4'
+		else element.style.color = 'black'
+	}
 	renderPage()
 }
 
