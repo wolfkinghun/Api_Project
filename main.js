@@ -28,6 +28,7 @@ function renderFc(result) {
 function renderPage() {
 	document.querySelector('.articles').innerHTML = ""
 	for (let pageData = (page - 1) * itemPerPage; pageData < (page) * itemPerPage; pageData++) {
+		if (data.length == pageData) break
 		document.querySelector('.articles').innerHTML +=`<article>
 														<div class="article-wrapper">
 														<figure>
