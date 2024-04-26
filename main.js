@@ -15,6 +15,8 @@ const itemPerPage = 3
 let page = 1
 let data
 let images = []
+checkContent()
+checkButtonContent()
 
 function renderFc(result) {
 	console.log(result);
@@ -52,6 +54,7 @@ function renderPage() {
 														</div>
 													</article>`
 	}
+	checkContent()
 }
 
 function renderPageButtons() {
@@ -62,6 +65,7 @@ function renderPageButtons() {
 		button.addEventListener('click', handlePage)
 		document.querySelector('.pages').appendChild(button)
 	}
+	checkButtonContent()
 }
 
 function handlePage(event) {
@@ -90,4 +94,16 @@ function toggleHidden() {
 		document.querySelector('.myBtn').classList.add('hidden')
 		document.querySelector('.loading').classList.remove('hidden')
 	}
+}
+
+function checkButtonContent() {
+	let pages = document.querySelector('.pages')
+	if (pages.childElementCount == 0) pages.style.backgroundColor = 'rgb(76 29 149)'
+	else pages.style.backgroundColor = '#fff'	
+}
+
+function checkContent() {
+	let content = document.getElementById('content')
+	if (document.querySelector('.articles').childElementCount == 0) content.style.backgroundColor = 'rgb(76 29 149)'
+	else content.style.backgroundColor = '#fff'
 }
