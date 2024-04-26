@@ -44,7 +44,7 @@ function renderPage() {
 														<div class="article-body">
 															<h2>${data[pageData].title}</h2>
 															
-															<a href="#" class="read-more">
+															<a href="" class="read-more" onclick="${redirect(data[pageData])}">
 															Read more <span class="sr-only">about this</span>
 															<svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
 																<path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -106,4 +106,22 @@ function checkContent() {
 	let content = document.getElementById('content')
 	if (document.querySelector('.articles').childElementCount == 0) content.style.backgroundColor = 'rgb(76 29 149)'
 	else content.style.backgroundColor = '#fff'
+}
+
+function redirect(array) {
+	fetch('secondary.html', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(array)
+	}).then(response => {
+		if (!response.ok) {
+			throw new Error('Network response was NOT okay!')
+		}
+		window.location.href = 'secondary.html'
+	})
+	.catch(error => {
+		console.error('There was a problem with the fetch operation.', error)
+	})
 }
