@@ -35,9 +35,9 @@ function renderPage() {
 	for (let pageData = (page - 1) * itemPerPage; pageData < (page) * itemPerPage; pageData++) {
 		if (data.length == pageData) break
 		document.querySelector('.articles').innerHTML +=`<article>
-														<div class="article-wrapper">
-														<figure>
-															<img src="${images[pageData]}" alt="" />
+														<div class="article-wrapper flex-wrap justify-center items-center">
+														<figure class="mt-1">
+															<img class="m-auto" src="${images[pageData]}" alt="" />
 														</figure>
 														<div class="article-body">
 															<h2>${data[pageData].title}</h2>
