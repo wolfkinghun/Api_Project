@@ -14,10 +14,14 @@ let totalItems
 const itemPerPage = 3
 let page = 1
 let data
+let images = []
 
 function renderFc(result) {
 	console.log(result);
 	data = result
+	for (let i = 0; i < result.length; i++) {
+		images.push(`https://source.unsplash.com/random/368×207/?food&randomNumber=${Math.floor(Math.random() * 100) + 1}`)
+	}
 	totalItems = data.length
 	totalPages = Math.ceil(totalItems / itemPerPage)
 	renderPage()
@@ -33,7 +37,7 @@ function renderPage() {
 		document.querySelector('.articles').innerHTML +=`<article>
 														<div class="article-wrapper">
 														<figure>
-															<img src="https://source.unsplash.com/random/800×450/?food&randomNumber=${Math.floor(Math.random() * 100) + 1}" alt="" />
+															<img src="${images[pageData]}" alt="" />
 														</figure>
 														<div class="article-body">
 															<h2>${data[pageData].title}</h2>
