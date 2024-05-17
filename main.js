@@ -32,6 +32,8 @@ function renderFc(result) {
 	toggleHidden()
 }
 
+
+
 function renderPage() {
 	document.querySelector('.articles').innerHTML = ""
 	for (let pageData = (page - 1) * itemPerPage; pageData < (page) * itemPerPage; pageData++) {
@@ -43,22 +45,13 @@ function renderPage() {
 														</figure>
 														<div class="article-body">
 															<h2>${data[pageData].title}</h2>
-															</div>
+															<button data-pagedata="${JSON.stringify(data[pageData]).replaceAll("\"", "\`")}" onclick="(()=>{
+																 	localStorage.setItem('data', this.dataset.pagedata);
+																	window.location.href = 'secondary.html';
+																})()">Read more</button>
+														</div>
 														</div>
 														</article>`
-		let redLink = document.createElement('a')
-		redLink.addEventListener('click', () => {
-			localStorage.setItem('data', JSON.stringify(data[pageData]))
-			window.location.href = 'secondary.html'
-		})
-		redLink.className = 'read-more'
-		redLink.textContent = 'Read more'
-		let span = document.createElement('span')
-		span.className = 'sr-only'
-		span.textContent = 'about this'
-		redLink.appendChild(span)
-		let list = document.querySelectorAll('.article-body')
-		list[list.length - 1].appendChild(redLink)
 	}
 	checkContent()
 }
